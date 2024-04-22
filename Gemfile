@@ -59,3 +59,5 @@ end
 gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
 
 gem "active_storage_validations", "~> 1.1"
+
+gem "sidekiq", "~> 7.2"

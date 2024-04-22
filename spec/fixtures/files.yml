@@ -1,0 +1,3 @@
+file1:
+  title: "File 1"
+  file: <%= fixture_file_upload('robot_scan.json', 'application/json') %>
