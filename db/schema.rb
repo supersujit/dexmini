@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2024_04_22_102941) do
+ActiveRecord::Schema.define(version: 2024_04_22_135922) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -43,6 +43,27 @@ ActiveRecord::Schema.define(version: 2024_04_22_102941) do
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
   end
 
+  create_table "comparison_report_results", force: :cascade do |t|
+    t.bigint "comparison_report_id", null: false
+    t.string "location_name"
+    t.boolean "is_scanned"
+    t.boolean "is_occupied"
+    t.string "expected_barcode"
+    t.string "actual_barcode"
+    t.integer "status"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["comparison_report_id"], name: "index_comparison_report_results_on_comparison_report_id"
+  end
+
+  create_table "comparison_reports", force: :cascade do |t|
+    t.bigint "robot_scan_id"
+    t.bigint "manual_scan_id"
+    t.integer "status"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   create_table "location_scans", force: :cascade do |t|
     t.string "location_name"
     t.boolean "is_scanned"
@@ -65,5 +86,6 @@ ActiveRecord::Schema.define(version: 2024_04_22_102941) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "comparison_report_results", "comparison_reports"
   add_foreign_key "location_scans", "scans"
 end
