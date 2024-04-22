@@ -34,7 +34,7 @@
       </div>
       <div class="basis-2/12">
         <div class="flex">
-          <%= link_to("#") do  %>
+          <%= link_to(comparison_reports_new_path(scan_id: scan.id)) do  %>
             <button type="button" class="bg-dexPrimary rounded py-3 px-5 cursor-pointer hover:bg-dexPrimary-400">Compare</button>
           <% end %>
         </div>

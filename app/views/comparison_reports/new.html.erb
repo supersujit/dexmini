@@ -1,0 +1,13 @@
+<%= render 'layouts/page_header', primary_title: 'Create Comparison Report',
+           secondary_title: 'Upload the CSV file to compare with selected Robot Scans' %>
+
+<%= form_for @comparison_report, url: "#", html: { multipart: true } do |f| %>
+  <%= f.hidden_field :robot_scan_id %>
+  <div class="field mb-7">
+    <%= f.file_field :file, class: 'w-2/4 border border-gray-300 cursor-pointer focus:outline-none' %>
+    <p class="mt-1 text-sm text-gray-500 dark:text-gray-300" id="file_input_help">Only CSV files are allowed.</p>
+  </div>
+  <div class="actions">
+    <%= f.submit class: "bg-dexPrimary rounded py-3 px-5 cursor-pointer hover:bg-dexPrimary-400" %>
+  </div>
+<% end %>
