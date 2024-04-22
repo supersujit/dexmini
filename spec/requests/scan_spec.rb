@@ -3,8 +3,28 @@
 require 'rails_helper'
 
 RSpec.describe 'Scans', type: :request do
+  fixtures :scans
   describe 'GET /index' do
-    pending "add some examples (or delete) #{__FILE__}"
+    context 'without any scans available' do
+      it 'returns http success' do
+        get '/scans'
+        expect(response).to have_http_status(:success)
+        expect(response.body).to include('No Robot Scans have found')
+      end
+    end
+
+    context 'with scans available' do
+      let(:scan) { scans(:one) }
+      before do
+        scan.update!(status: Scan.statuses[:completed],
+                     file: fixture_file_upload('robot_scan.json', 'application/json'))
+      end
+      it 'returns http success' do
+        get '/scans'
+        expect(response).to have_http_status(:success)
+        expect(response.body).to include(scan.filename)
+      end
+    end
   end
 
   describe 'POST /create' do

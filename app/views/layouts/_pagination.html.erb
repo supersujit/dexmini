@@ -1,0 +1,13 @@
+<div class="flex justify-end mb-5 text-slate-700 items-center">
+  <% if @page > 1 %>
+    <%= link_to(previous_link) do %>
+      <div class="px-4 rounded p-2 mr-2 bg-dexPrimary"> < </div>
+    <% end %>
+  <% end %>
+  <div class="px-4 rounded p-2 mr-2 bg-gray-100"><%= @page %></div>
+  <% if @page < @total_pages %>
+    <%= link_to(next_link) do %>
+      <div class="px-4 rounded p-2 bg-dexPrimary"> > </div>
+    <% end %>
+  <% end %>
+</div>

@@ -2,7 +2,12 @@
 
 # Controller to manage the scans
 class ScansController < ApplicationController
-  def index; end
+  skip_before_action :verify_authenticity_token, only: %i[create]
+  include Pagination
+
+  def index
+    paginate_records(RobotScan.completed.all.order(created_at: :desc))
+  end
 
   def create
     @scan = RobotScan.new(scan_params)
