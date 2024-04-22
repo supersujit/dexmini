@@ -1,0 +1,15 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  location_name: MyString
+  is_scanned: false
+  is_occupied: false
+  barcode: MyString
+  scan: one
+
+two:
+  location_name: MyString
+  is_scanned: false
+  is_occupied: false
+  barcode: MyString
+  scan: two
