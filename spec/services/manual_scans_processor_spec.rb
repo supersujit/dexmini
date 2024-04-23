@@ -3,8 +3,8 @@
 require 'rails_helper'
 
 RSpec.describe ManualScansProcessor do
-  fixtures :scans
-  let(:scan) { scans(:two) }
+  fixtures :manual_scans
+  let(:scan) { manual_scans(:manual_scan1) }
 
   describe '#process' do
     context 'when valid file is passed' do

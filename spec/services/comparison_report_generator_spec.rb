@@ -3,9 +3,16 @@
 require 'rails_helper'
 
 RSpec.describe ComparisonReportGenerator do
-  fixtures :comparison_reports, :location_scans
+  fixtures :robot_scans, :manual_scans, :comparison_reports, :location_scans
 
   let(:comparison_report) { comparison_reports(:report1) }
+  let(:robot_location_scan) { location_scans(:robot_location_scan1) }
+  let(:manual_location_scan) { location_scans(:manual_location_scan1) }
+
+  before do
+    robot_location_scan.update!(scan: comparison_report.robot_scan)
+    manual_location_scan.update!(scan: comparison_report.manual_scan)
+  end
 
   describe '#generate' do
     context 'when there are no entries' do
@@ -18,14 +25,6 @@ RSpec.describe ComparisonReportGenerator do
     end
 
     context 'when robot scan has entries' do
-      let(:robot_location_scan) { location_scans(:robot_location_scan1) }
-      let(:manual_location_scan) { location_scans(:manual_location_scan1) }
-
-      before do
-        robot_location_scan.update!(scan: comparison_report.robot_scan)
-        manual_location_scan.update!(scan: comparison_report.manual_scan)
-      end
-
       context 'with location was occupied as expected' do
         it 'creates a new result' do
           expect do

@@ -3,9 +3,9 @@
 require 'rails_helper'
 
 RSpec.describe ProcessScannedFileJob, type: :job do
-  fixtures :scans
+  fixtures :robot_scans
 
-  let(:scan) { scans(:one) }
+  let(:scan) { robot_scans(:robot_scan1) }
 
   context 'when the file is valid json file' do
     before do

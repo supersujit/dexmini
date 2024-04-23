@@ -3,8 +3,8 @@
 require 'rails_helper'
 
 RSpec.describe RobotScansProcessor do
-  fixtures :scans
-  let(:scan) { scans(:one) }
+  fixtures :robot_scans
+  let(:scan) { robot_scans(:robot_scan1) }
 
   describe '#process' do
     context 'when valid file is passed' do

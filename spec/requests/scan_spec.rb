@@ -36,7 +36,7 @@ RSpec.describe 'Scans', type: :request do
       it 'creates a scan' do
         post '/scans', params: valid_params
         expect(response).to have_http_status(:created)
-        expect(JSON.parse(response.body)['message']).to eq('Scan created successfully')
+        expect(JSON.parse(response.body)['message']).to eq('Robot Scan created successfully')
       end
     end
 
