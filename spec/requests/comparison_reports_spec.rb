@@ -3,7 +3,7 @@
 require 'rails_helper'
 
 RSpec.describe 'ComparisonReports', type: :request do
-  fixtures :scans
+  fixtures :scans, :comparison_reports
 
   let(:scan) { scans(:one) }
   before do
@@ -19,8 +19,9 @@ RSpec.describe 'ComparisonReports', type: :request do
   end
 
   describe 'GET /show' do
+    let(:comparison_report) { comparison_reports(:report1) }
     it 'returns http success' do
-      get '/comparison_reports/show'
+      get '/comparison_reports/show', params: { id: comparison_report.id }
       expect(response).to have_http_status(:success)
     end
   end
