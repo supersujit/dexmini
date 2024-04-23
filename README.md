@@ -21,6 +21,13 @@ comparison in a tabular format or export the result in a CSV format.
 4. A paginated list of comparison results for each locations.
 5. A button to export the comparison results in CSV format.
 
+## Demo
+
+
+https://github.com/supersujit/dexmini/assets/10810996/81395049-5310-46bc-bfd1-cf38602fcb4d
+
+
+
 ## Setup
 Please follow below steps to setup the application (Please see troubleshooting section for any issues):
 1. `bundle install` - To install the dependencies.
