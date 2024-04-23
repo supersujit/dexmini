@@ -7,5 +7,9 @@ Rails.application.routes.draw do
   get 'scans/index'
   get 'scans/create'
   resources :scans, only: %i[index create]
-  resources :comparison_reports, only: %i[new show]
+  resources :comparison_reports, only: %i[new show] do
+    collection do
+      post :generate
+    end
+  end
 end

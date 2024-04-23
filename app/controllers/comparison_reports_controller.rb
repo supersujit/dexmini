@@ -8,4 +8,22 @@ class ComparisonReportsController < ApplicationController
   end
 
   def show; end
+
+  def generate
+    render :new and return unless comparison_report_params[:file].present?
+
+    manual_scan = ManualScan.create!(file: comparison_report_params[:file])
+    @comparison_report = ComparisonReport.create!(robot_scan_id: comparison_report_params[:robot_scan_id],
+                                                  manual_scan_id: manual_scan.id,
+                                                  status: ComparisonReport.statuses[:pending])
+    ProcessComparisonReportJob.perform_async(@comparison_report.id)
+    redirect_to @comparison_report
+  end
+
+  private
+
+  def comparison_report_params
+    params.require(:comparison_report).permit(:robot_scan_id, :file)
+  end
+
 end

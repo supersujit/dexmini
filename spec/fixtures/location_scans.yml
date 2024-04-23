@@ -1,15 +1,15 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-one:
-  location_name: MyString
-  is_scanned: false
-  is_occupied: false
-  barcode: MyString
-  scan: one
+robot_location_scan1:
+  location_name: 'test_location'
+  is_scanned: true
+  is_occupied: true
+  barcode: 'test_barcode1'
+  scan: robot_scan1
 
-two:
-  location_name: MyString
-  is_scanned: false
-  is_occupied: false
-  barcode: MyString
-  scan: two
+manual_location_scan1:
+  location_name: 'test_location'
+  is_scanned: true
+  is_occupied: true
+  barcode: 'test_barcode1'
+  scan: manual_scan1
