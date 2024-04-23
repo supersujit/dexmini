@@ -11,4 +11,8 @@ class ComparisonReport < ApplicationRecord
   def still_processing?
     processing? || pending?
   end
+
+  def ready?
+    completed? || failed?
+  end
 end

@@ -10,6 +10,7 @@ Rails.application.routes.draw do
   resources :comparison_reports, only: %i[new show] do
     collection do
       post :generate
+      get '/:id/export_csv', to: 'comparison_reports#export_csv', as: :export_csv
     end
   end
 end

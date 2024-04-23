@@ -1,4 +1,44 @@
-<div>
-  <h1 class="font-bold text-4xl">ComparisonReports#show</h1>
-  <p>Find me in app/views/comparison_reports/show.html.erb</p>
-</div>
+<%= render 'layouts/page_header', primary_title: 'View Comparison Report',
+           secondary_title: 'Result of the comparison of Robot and Manual scans. You can also download the report in CSV format' %>
+
+<% if @comparison_report.still_processing? %>
+  <h1>Comparison Report is still being generated. Please Fetch Results in few seconds.</h1>
+  <%= link_to(@comparison_report) do  %>
+    <button type="button" class="bg-dexPrimary rounded py-3 px-5 mt-5 cursor-pointer hover:bg-dexPrimary-400">Fetch Result</button>
+  <% end %>
+<% elsif @comparison_report.ready? %>
+  <div class="flex justify-between">
+    <%= link_to(export_csv_comparison_reports_path(@comparison_report)) do  %>
+      <button type="button" class="bg-dexPrimary rounded py-3 px-5 cursor-pointer hover:bg-dexPrimary-400">Export CSV</button>
+    <% end %>
+    <%= render "layouts/pagination",
+               previous_link: comparison_report_path(@comparison_report, page: @page - 1),
+               next_link: comparison_report_path(@comparison_report, page: @page + 1)
+    %>
+  </div>
+
+  <ul class="[&>*:nth-child(even)]:bg-slate-50">
+    <li class="flex flex-row w-full justify-between gap-9 p-2 mb-5 border-b-2 font-semibold">
+      <div class="basis-2/12">Location</div>
+      <div class="basis-1/12">Is Scanned</div>
+      <div class="basis-1/12">Is Occupied</div>
+      <div class="basis-2/12">Expected Barcode</div>
+      <div class="basis-2/12">Actual Barcode</div>
+      <div class="basis-4/12">Description</div>
+    </li>
+    <% unless @records.size.positive? %>
+      <div class="text-slate-500">No Robot Scans have found</div>
+    <% end %>
+    <% @records.each do |result| %>
+      <li class="flex flex-row w-full justify-between items-center gap-9 py-3">
+        <div class="basis-2/12"><%= result.location_name %></div>
+        <div class="basis-1/12"><%= result.is_scanned %></div>
+        <div class="basis-1/12"><%= result.is_occupied %></div>
+        <div class="basis-2/12"><%= result.expected_barcode %></div>
+        <div class="basis-2/12"><%= result.actual_barcode %></div>
+        <div class="basis-4/12"><%= result.description %></div>
+      </li>
+    <% end %>
+  </ul>
+<% end %>
+
